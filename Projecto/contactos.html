@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacto de Proveedores</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app" style="max-width: 1000px; margin: auto; padding: 40px;">
+    <h1>📇 Contacto de Proveedores</h1>
+    
+    <table class="tabla-productos">
+      <thead>
+        <tr>
+          <th>Proveedor</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th>Dirección</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="prov in proveedores">
+          <td>{{ prov.nombre }}</td>
+          <td>{{ prov.telefono }}</td>
+          <td>{{ prov.email }}</td>
+          <td>{{ prov.direccion }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+    <button class="gris" onclick="window.location.href='index.html'">⬅ Volver</button>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          proveedores: [
+            { nombre: 'Distribuidora Norte', telefono: '+56 9 1234 5678', email: 'norte@proveedor.cl', direccion: 'Av. Norte 123' },
+            { nombre: 'Proveeduría Centro', telefono: '+56 2 9876 5432', email: 'centro@proveedor.cl', direccion: 'Calle Centro 456' },
+            { nombre: 'Suministros Sur', telefono: '+56 9 1122 3344', email: 'sur@suministros.cl', direccion: 'Pasaje Sur 789' }
+          ]
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

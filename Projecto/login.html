@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - ControlRepro</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="login.js" defer></script>
+</head>
+<body class="login-body">
+
+  <div class="login-container">
+    <img src="assets/Icon.png" alt="Logo ControlRepro" class="logo-login" />
+
+    <h2>Inicio de Sesión</h2>
+
+    <form id="loginForm">
+      <input type="text" id="rut" placeholder="RUT (ej: 12.345.678-9)" required />
+      <input type="password" id="pin" placeholder="PIN" required />
+      <button type="submit">Ingresar</button>
+    </form>
+
+    <p id="mensajeError" class="error"></p>
+  </div>
+
+</body>
+</html>

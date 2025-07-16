@@ -1,0 +1,45 @@
+{
+  "name": "controlrepro",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "Control inteligente de reposiciones para PYMES",
+  "author": "Sebastian Cerda Fuentes",
+  "license": "ISC",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.controlrepro.app",
+    "productName": "ControlRepro",
+    "copyright": "Copyright © 2025",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icono.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "ControlRepro",
+      "installerIcon": "assets/icono.ico"
+    }
+  }
+}
