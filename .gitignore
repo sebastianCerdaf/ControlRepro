@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+Projecto/node_modules/
+
+# Electron build output
+Projecto/ControlRePro-win32-x64/
+Projecto/dist/
+
+# Build artifacts
+Projecto/*.log
+Projecto/*.tsbuildinfo
+Projecto/*.tmp
+Projecto/*.cache
+Projecto/*.bak
+
+# Compiled binaries and packages
+Projecto/**/*.exe
+Projecto/**/*.dll
+Projecto/**/*.pak
+Projecto/**/*.bin
+Projecto/**/*.dat
+Projecto/**/*.asar
+Projecto/**/*.json
+Projecto/**/*.node
+
+# Misc
+Projecto/**/*.lock
+
+# Ignore system files
+.env
+.env.*
+*.swp
+*.swo
+*.tmp
+*.bak
+*.log
