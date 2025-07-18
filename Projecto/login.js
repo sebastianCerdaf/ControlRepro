@@ -1,30 +1,28 @@
 import { trabajadores } from './BDTrabajadores.js';
 
-// Función para formatear RUT automáticamente mientras se escribe
 function formatearRUT(rut) {
-  rut = rut.replace(/\D/g, ''); // Solo números
+  rut = rut.replace(/[^\dkK]/g, '');
+  if (rut.length < 2) return rut;
   let cuerpo = rut.slice(0, -1);
   let dv = rut.slice(-1);
-
-  cuerpo = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-  return cuerpo + "-" + dv;
+  let cuerpoFormateado = '';
+  while (cuerpo.length > 3) {
+    cuerpoFormateado = '.' + cuerpo.slice(-3) + cuerpoFormateado;
+    cuerpo = cuerpo.slice(0, -3);
+  }
+  cuerpoFormateado = cuerpo + cuerpoFormateado;
+  return cuerpoFormateado + '-' + dv;
 }
 
-// Validación de formato de RUT chileno simple
 function validarRUT(rut) {
   return /^\d{1,2}\.\d{3}\.\d{3}-[\dkK]$/.test(rut);
 }
 
-// Evento en el input del RUT para formatear
 const rutInput = document.getElementById('rut');
-rutInput.addEventListener('input', () => {
-  const cursor = rutInput.selectionStart;
+rutInput.addEventListener('blur', () => {
   rutInput.value = formatearRUT(rutInput.value);
-  rutInput.setSelectionRange(cursor, cursor);
 });
 
-// Validación del formulario
 document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
