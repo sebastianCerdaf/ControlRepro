@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <title>ControlRepro - Reposición Inteligente</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
   <style>
     .header-desordenado {
       position: relative;
@@ -46,7 +46,7 @@
 <div class="main-glass-card" id="innerApp">
     <header class="header-desordenado">
       <button class="cerrar-sesion" @click="confirmarCerrarSesion">Cerrar Sesión</button>
-      <img src="assets/Icon.png" alt="Logo ControlRepro" class="logo-principal logo-centrado" />
+      <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="logo-principal logo-centrado" />
     </header>
     <h1 class="titulo-central">ControlRepro - Reposición Inteligente</h1>
 
@@ -121,7 +121,7 @@
 
 <div id="modalAcceso" class="modal hidden">
   <div class="modal-contenido">
-    <img src="assets/Icon.png" alt="Logo ControlRepro" class="modal-logo" />
+    <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="modal-logo" />
     <h2>Acceso restringido</h2>
     <p>Para ingresar a la sección de contactos, necesitas autorización de un administrador.</p>
     <input type="password" id="codigoInput" placeholder="Ingresa el código de acceso" />
@@ -146,8 +146,8 @@
   <div id="popupError" class="popup-error"></div>
 </div>
 
-<script src="BDProductos.js"></script>
-<script src="app.js"></script>
+<script src="../../BDProductos.js"></script>
+<script src="../../app.js"></script>
 
 <style>
   .popup-error {

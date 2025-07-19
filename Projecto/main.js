@@ -18,7 +18,7 @@ function createWindow() {
   // Habilita el acceso a Electron desde el renderer (para dialog, fs, path, etc.)
   remoteMain.enable(win.webContents);
 
-  win.loadFile('login.html'); // O cambia a login.html si prefieres iniciar ahí
+  win.loadFile('presentation/views/LoginView.html');
 }
 
 app.whenReady().then(createWindow);

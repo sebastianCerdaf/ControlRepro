@@ -169,7 +169,7 @@ const app = Vue.createApp({
     validarCodigo() {
       const codigo = document.getElementById('codigoInput').value;
       if (codigo === 'admin123') {
-        window.location.href = 'contactos.html';
+        window.location.href = 'ContactsView.html';
       } else {
         document.getElementById('mensajeError').textContent = 'Código incorrecto. Acceso denegado.';
       }
@@ -177,7 +177,7 @@ const app = Vue.createApp({
 
     cerrarSesion() {
       localStorage.removeItem('productos');
-      window.location.href = 'login.html';
+      window.location.href = 'presentation/views/LoginView.html';
     },
     confirmarCerrarSesion() {
     document.getElementById('modalCerrarSesion').classList.remove('hidden');

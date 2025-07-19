@@ -39,7 +39,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
 
   if (trabajador) {
     localStorage.setItem('usuarioActual', JSON.stringify(trabajador));
-    window.location.href = 'index.html';
+    window.location.href = 'MainView.html';
   } else {
     mensajeError.textContent = '⚠️ RUT o PIN incorrectos';
   }
