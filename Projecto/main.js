@@ -27,12 +27,10 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// === EXTRAS PARA EXPORTACIÓN Y SELECCIÓN DE CARPETA ===
 const { ipcMain, dialog } = require('electron');
 const fs = require('fs');
 const xlsx = require('xlsx');
 
-// === Seleccionar carpeta ===
 ipcMain.handle('seleccionar-carpeta', async () => {
   const result = await dialog.showOpenDialog({
     properties: ['openDirectory']
@@ -42,7 +40,6 @@ ipcMain.handle('seleccionar-carpeta', async () => {
   return result.filePaths[0];
 });
 
-// === Guardar Excel con proveedores como texto ===
 ipcMain.handle('guardar-excel', async (event, { productos, ruta }) => {
   try {
     if (!fs.existsSync(ruta)) {

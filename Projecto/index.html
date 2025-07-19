@@ -41,23 +41,20 @@
     }
   </style>
 </head>
-<body>
+<body id="app">
 
-<div id="app">
+<div class="main-glass-card" id="innerApp">
+    <header class="header-desordenado">
+      <button class="cerrar-sesion" @click="confirmarCerrarSesion">Cerrar Sesión</button>
+      <img src="assets/Icon.png" alt="Logo ControlRepro" class="logo-principal logo-centrado" />
+    </header>
+    <h1 class="titulo-central">ControlRepro - Reposición Inteligente</h1>
 
-  <!-- ENCABEZADO DESORDENADO -->
-  <header class="header-desordenado">
-    <button class="cerrar-sesion" @click="confirmarCerrarSesion">Cerrar Sesión</button>
-    <img src="assets/Icon.png" alt="Logo ControlRepro" class="logo-principal logo-centrado" />
-  </header>
-  <h1 class="titulo-central">ControlRepro - Reposición Inteligente</h1>
-
-  <!-- FORMULARIO -->
-  <form @submit.prevent="agregarProducto" class="formulario">
-    <div class="autocomplete-wrapper">
-      <input v-model="nuevoProducto.id"
-             @input="buscarSugerencias"
-             @focus="mostrarSugerencias = true"
+    <form @submit.prevent="agregarProducto" class="formulario">
+      <div class="autocomplete-wrapper">
+        <input v-model="nuevoProducto.id"
+               @input="buscarSugerencias"
+               @focus="mostrarSugerencias = true"
              @blur="ocultarSugerencias"
              placeholder="ID o Nombre Producto"
              required />
@@ -74,7 +71,6 @@
     <input v-model.number="nuevoProducto.stockMinimo" type="number" :readonly="false" placeholder="Punto de Reposición" required />
   </form>
 
-  <!-- BOTONERA UNIFICADA -->
   <div class="botonera unificada">
     <button type="submit" @click="agregarProducto" class="azul">Agregar Producto</button>
     <button type="button" @click="borrarCamposProducto" class="gris">Borrar Campos</button>
@@ -85,7 +81,6 @@
 
   <p v-if="rutaGuardado" style="font-style: italic; color: gray;">📂 Carpeta actual: {{ rutaGuardado }}</p>
 
-  <!-- LISTADO DE PRODUCTOS -->
   <div class="tabla-productos-wrapper" v-if="productos.length">
     <table class="tabla-productos">
       <thead>
@@ -122,44 +117,38 @@
       </tbody>
     </table>
   </div>
+</div>
 
-  <!-- MODAL DE ACCESO -->
-  <div id="modalAcceso" class="modal hidden">
-    <div class="modal-contenido">
-      <img src="assets/Icon.png" alt="Logo ControlRepro" class="modal-logo" />
-      <h2>Acceso restringido</h2>
-      <p>Para ingresar a la sección de contactos, necesitas autorización de un administrador.</p>
-      <input type="password" id="codigoInput" placeholder="Ingresa el código de acceso" />
-      <div class="modal-botones">
-        <button @click="validarCodigo" class="azul">Acceder</button>
-        <button @click="cerrarModal" class="gris">Cancelar</button>
-      </div>
-      <p id="mensajeError" class="modal-error"></p>
+<div id="modalAcceso" class="modal hidden">
+  <div class="modal-contenido">
+    <img src="assets/Icon.png" alt="Logo ControlRepro" class="modal-logo" />
+    <h2>Acceso restringido</h2>
+    <p>Para ingresar a la sección de contactos, necesitas autorización de un administrador.</p>
+    <input type="password" id="codigoInput" placeholder="Ingresa el código de acceso" />
+    <div class="modal-botones">
+      <button @click="validarCodigo" class="azul">Acceder</button>
+      <button @click="cerrarModal" class="gris">Cancelar</button>
+    </div>
+    <p id="mensajeError" class="modal-error"></p>
+  </div>
+</div>
+
+<div id="modalCerrarSesion" class="modal hidden">
+  <div class="modal-contenido">
+    <h2>¿Cerrar sesión?</h2>
+    <p>Se perderán los datos actuales si no los ha exportado.</p>
+    <div class="modal-botones">
+      <button @click="cerrarSesion" class="azul">Sí, cerrar sesión</button>
+      <button @click="cerrarModalCerrarSesion" class="gris">Cancelar</button>
     </div>
   </div>
-
-  <!-- MODAL DE CONFIRMACIÓN DE CIERRE DE SESIÓN -->
-  <div id="modalCerrarSesion" class="modal hidden">
-    <div class="modal-contenido">
-      <h2>¿Cerrar sesión?</h2>
-      <p>Se perderán los datos actuales si no los ha exportado.</p>
-      <div class="modal-botones">
-        <button @click="cerrarSesion" class="azul">Sí, cerrar sesión</button>
-        <button @click="cerrarModalCerrarSesion" class="gris">Cancelar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- POPUP ERROR -->
+</div>
   <div id="popupError" class="popup-error"></div>
+</div>
 
-</div> <!-- FIN DE #app -->
-
-<!-- JS Y DEPENDENCIAS -->
 <script src="BDProductos.js"></script>
 <script src="app.js"></script>
 
-<!-- ESTILOS ADICIONALES -->
 <style>
   .popup-error {
     position: fixed;
