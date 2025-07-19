@@ -1,4 +1,4 @@
-import { trabajadores } from './BDTrabajadores.js';
+import { trabajadores } from '../../BDTrabajadores.js';
 
 function formatearRUT(rut) {
   rut = rut.replace(/[^\dkK]/g, '');
