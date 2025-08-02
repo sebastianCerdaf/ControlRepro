@@ -1,4 +1,4 @@
-// BDProductos.js
+// productos.repository.js
 
 window.productosBase = [
   {

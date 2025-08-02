@@ -18,12 +18,34 @@ const app = Vue.createApp({
         stockMinimo: '',
         proveedores: []
       },
-      productoBloqueado: false,
       rutaGuardado: '',
       sugerencias: [],
       mostrarSugerencias: false,
       mostrarErrorCampos: false
     };
+  },
+  computed: {
+    tieneDatosProducto() {
+      return this.nuevoProducto.id !== '' || 
+             this.nuevoProducto.categoria !== '' || 
+             this.nuevoProducto.precioCaja30 !== '' || 
+             this.nuevoProducto.stock !== '' || 
+             this.nuevoProducto.stockMinimo !== '';
+    }
+  },
+  computed: {
+    tieneDatosProducto() {
+      return this.nuevoProducto.id !== '' || 
+             this.nuevoProducto.categoria !== '' || 
+             this.nuevoProducto.precioCaja30 !== '' || 
+             this.nuevoProducto.stock !== '' || 
+             this.nuevoProducto.stockMinimo !== '';
+    },
+    productoBloqueado: false,
+    rutaGuardado: '',
+    sugerencias: [],
+    mostrarSugerencias: false,
+    mostrarErrorCampos: false
   },
   methods: {
     agregarProducto() {

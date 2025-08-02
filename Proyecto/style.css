@@ -8,102 +8,6 @@ body {
   background: linear-gradient(120deg, #e0e7ff 0%, #f0fdfa 100%);
   background-attachment: fixed;
   animation: bgmove 12s ease-in-out infinite alternate;
-}
-
-@keyframes bgmove {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-
-.main-glass-card {
-  background: rgba(255,255,255,0.85);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
-  backdrop-filter: blur(8px);
-  border-radius: 24px;
-  padding: 36px 32px 32px 32px;
-  margin: 40px auto 0 auto;
-  max-width: 1100px;
-  border: 1.5px solid rgba(200,200,255,0.13);
-}
-
-#innerApp {
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
-  max-width: 100%;
-  border: none;
-}
-
-header.header-desordenado {
-  background: rgba(255,255,255,0.85);
-  box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.08);
-  border-radius: 18px;
-  padding: 18px 32px 18px 32px;
-  position: sticky;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 150px;
-  overflow: hidden;
-}
-
-.titulo-central {
-  font-family: 'Oswald', 'Bebas Neue', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  margin: 0 0 32px 0;
-  color: #1e293b;
-  text-shadow: 0 2px 8px rgba(31, 38, 135, 0.08);
-}
-
-form.formulario {
-  background: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  margin-bottom: 24px;
-  border-bottom: 1.5px solid #e0e7ef;
-  padding-bottom: 18px;
-}
-
-.botonera.unificada {
-  margin: 24px 0 32px 0;
-}
-
-table.tabla-productos tbody tr:hover {
-  background: #f1f5f9;
-  transition: background 0.2s;
-}
-
-.botonera.unificada button, button.azul, button.gris, button.eliminar {
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(31, 38, 135, 0.08);
-  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-}
-.botonera.unificada button:hover, button.azul:hover, button.gris:hover, button.eliminar:hover {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.13);
-}
-
-@media (max-width: 700px) {
-  #innerApp, .main-glass-card {
-    padding: 12px 2vw;
-    margin: 12px 0 0 0;
-  }
-  .titulo-central {
-    font-size: 1.2rem;
-  }
-}
-
-/* ====== GENERAL ====== */
-body {
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background-color: #f9fafb;
   color: #1f2937;
@@ -111,214 +15,171 @@ body {
   padding: 40px;
 }
 
-#innerApp {
-  max-width: 1100px;
-  margin: auto;
+@keyframes bgmove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-/* ====== TÍTULOS ====== */
-h1 {
-  font-family: 'Oswald', 'Bebas Neue', sans-serif;
-  font-size: 1.8em;
-  margin: 0;
-  color: #1f2937;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+/* ====== LAYOUT & CONTAINERS ====== */
+.main-glass-card {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.13);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 36px 32px 32px;
+  margin: 40px auto 0;
+  max-width: 1100px;
+  border: 1.5px solid rgba(200,200,255,0.13);
+  z-index: 100;
+}
+
+#innerApp {
+  background: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1100px;
 }
 
 /* ====== HEADER ====== */
-header {
+header.header-desordenado {
+  background: white;
+  position: relative;
+  width: 100%;
+  height: 140px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 18px;
 }
 
 .logo-principal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 240px;
   max-width: 100%;
   height: auto;
   margin: 0 auto;
   display: block;
   object-fit: contain;
-  flex: 1 1 auto;
+  z-index: 1;
 }
 
 .cerrar-sesion {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   background-color: #dc2626;
   color: white;
   border: none;
   padding: 10px 18px;
   border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
   font-size: 14px;
-  transition: background-color 0.2s ease;
-  margin-right: 32px;
-  flex: 0 0 auto;
+  z-index: 2;
+  transition: background-color 0.2s;
 }
 
 .cerrar-sesion:hover {
   background-color: #b91c1c;
 }
 
-/* ====== FORMULARIO ====== */
-form.formulario {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: flex-start;
-  margin-bottom: 12px;
+/* ====== TITLES ====== */
+h1, .titulo-central {
+  font-family: 'Oswald', 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: 1.5px;
+  margin: 0 0 32px;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(31, 38, 135, 0.08);
 }
 
-form.formulario input {
-  flex: 1 1 180px;
-  min-width: 160px;
-  padding: 9px 10px;
+@media (max-width: 700px) {
+  h1, .titulo-central {
+    font-size: 1.2rem;
+  }
+}
+
+/* ====== FORM ====== */
+form.formulario {
+  margin-bottom: 24px;
+  border-bottom: 1.5px solid #e0e7ef;
+  padding-bottom: 36px;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .grid-form {
+    grid-template-columns: 1fr;
+  }
+
+  .acciones-principales,
+  .acciones-secundarias {
+    justify-content: center;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  padding: 8px 10px;
+  height: 38px;
+  font-size: 14px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
-  font-size: 14px;
-  background-color: #fff;
-}
-
-/* ====== BOTONERA ====== */
-.botonera.unificada {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 20px 0;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-}
-
-.botonera.unificada button {
-  padding: 10px 18px;
-  font-size: 13.5px;
-  font-weight: 600;
-  border: none;
-  border-radius: 20px; /* chips */
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-}
-
-.botonera.unificada button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-button.azul {
-  background-color: #374151;
-  color: white;
-}
-
-button.azul:hover {
-  background-color: #1f2937;
-}
-
-button.gris {
-  background-color: #6b7280;
-  color: white;
-}
-
-button.gris:hover {
-  background-color: #4b5563;
-}
-
-button.eliminar {
-  background-color: #ef4444;
-  padding: 8px 16px;
-  font-size: 13px;
-  color: white;
-  border: none;
-  border-radius: 6px;
-}
-
-button.eliminar:hover {
-  background-color: #b91c1c;
-}
-
-/* ====== TABLA PRODUCTOS ====== */
-.tabla-productos-wrapper {
-  overflow-x: auto;
-}
-
-table.tabla-productos {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
   background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: none;
 }
 
-table.tabla-productos th {
-  background-color: #f3f4f6;
-  text-align: left;
-  padding: 10px 14px;
-  color: #374151;
-  font-weight: 600;
-}
-
-table.tabla-productos td {
-  padding: 10px 14px;
-  border-top: 1px solid #f3f4f6;
-  vertical-align: top;
-  color: #1f2937;
-}
-
-.tabla-productos td strong {
-  font-weight: 600;
-}
-
-.proveedores-tabla {
-  list-style: disc;
-  padding-left: 16px;
-  margin: 0;
-}
-
-.proveedores-tabla li {
-  font-size: 13px;
-  margin-bottom: 4px;
-  color: #374151;
-}
-
-/* ====== BAJO STOCK ====== */
-.bajo-stock {
-  background-color: #fef2f2;
-}
-
-.producto-alerta {
-  color: #dc2626;
-  font-weight: bold;
-  font-size: 13px;
-}
-
-/* ====== AUTOCOMPLETADO ====== */
+/* ====== AUTOCOMPLETE ====== */
 .autocomplete-wrapper {
   position: relative;
   flex: 1 1 100%;
   min-width: 160px;
+  z-index: 9000;
 }
 
 .sugerencias {
   position: absolute;
-  z-index: 1000;
   top: 100%;
   left: 0;
   right: 0;
+  z-index: 9001;
   background: white;
   border: 1px solid #d1d5db;
   border-top: none;
-  max-height: 200px;
+  max-height: 240px;
   overflow-y: auto;
   list-style: none;
   margin: 0;
   padding: 0;
   border-radius: 0 0 6px 6px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .sugerencias li {
@@ -336,7 +197,188 @@ table.tabla-productos td {
   background-color: #f3f4f6;
 }
 
-/* ====== MODAL RESTRINGIDO ====== */
+/* ====== BUTTONS ====== */
+.botonera {
+  position: relative;
+  z-index: 2;
+}
+
+.acciones-principales,
+.acciones-secundarias {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  z-index: 1;
+}
+
+.acciones-principales {
+  margin-bottom: 12px;
+  justify-content: flex-start;
+}
+
+.acciones-secundarias {
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.acciones-secundarias button {
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+/* Common button styles */
+.botonera.unificada button,
+button.azul,
+button.gris,
+button.eliminar,
+button.limpiar {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(31, 38, 135, 0.08);
+  transition: background 0.2s, transform 0.1s;
+}
+
+/* Button variants */
+button.azul {
+  background-color: #374151;
+}
+
+button.azul:hover {
+  background-color: #1f2937;
+}
+
+button.gris {
+  background-color: #6b7280;
+}
+
+button.gris:hover {
+  background-color: #4b5563;
+}
+
+button.eliminar {
+  background-color: #ef4444;
+}
+
+button.eliminar:hover {
+  background-color: #b91c1c;
+  transform: translateY(-1px) scale(1.03);
+}
+
+button.limpiar {
+  background-color: #64748b;
+}
+
+button.limpiar:hover {
+  background-color: #475569;
+}
+
+/* Disabled state */
+button.limpiar[disabled] {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+button.limpiar[disabled]:hover {
+  background-color: #f1f5f9;
+  transform: none;
+}
+
+/* ====== TABLE ====== */
+.tabla-productos-wrapper {
+  overflow-x: auto;
+}
+
+table.tabla-productos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+table.tabla-productos th,
+table.tabla-productos td {
+  padding: 8px 12px;
+}
+
+table.tabla-productos th {
+  background-color: #f3f4f6;
+  text-align: left;
+  color: #374151;
+  font-weight: 600;
+}
+
+table.tabla-productos td {
+  border-top: 1px solid #f3f4f6;
+  vertical-align: top;
+  color: #1f2937;
+}
+
+.tabla-productos td strong {
+  font-weight: 600;
+}
+
+table.tabla-productos tbody tr:hover {
+  background: #f1f5f9;
+  transition: background 0.2s;
+}
+
+.proveedores-tabla {
+  list-style: disc;
+  padding-left: 16px;
+  margin: 0;
+}
+
+.proveedores-tabla li {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #374151;
+}
+
+/* ====== LOW STOCK ====== */
+.bajo-stock {
+  background-color: #fef2f2;
+}
+
+.producto-alerta {
+  color: #dc2626;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* ====== MODAL & POPUP ====== */
+.popup-error {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4d4d;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.popup-error.visible {
+  opacity: 1;
+}
+
 .modal {
   position: fixed;
   inset: 0;
@@ -344,7 +386,7 @@ table.tabla-productos td {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .modal.hidden {
@@ -400,7 +442,7 @@ table.tabla-productos td {
   margin-top: 10px;
 }
 
-/* ====== LOGIN ====== */
+/* ====== LOGIN PAGE ====== */
 .login-body {
   background-color: #f3f4f6;
   display: flex;
@@ -444,7 +486,6 @@ table.tabla-productos td {
   border: 1px solid #d1d5db;
   border-radius: 8px;
   transition: border-color 0.3s ease;
-  box-sizing: border-box;
 }
 
 .login-container input:focus {
@@ -475,19 +516,4 @@ table.tabla-productos td {
   margin-top: 10px;
   font-size: 14px;
   font-weight: 500;
-}
-
-/* ====== RESPONSIVE ====== */
-@media (max-width: 480px) {
-  .logo-principal {
-    width: 100px;
-  }
-
-  .modal-logo {
-    width: 90px;
-  }
-
-  h1 {
-    font-size: 1.4em;
-  }
 }
