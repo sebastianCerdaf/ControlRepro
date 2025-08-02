@@ -14,7 +14,7 @@
       <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="logo-principal" />
     </header>
 
-    <form @submit.prevent="agregarProducto" class="formulario grid-form">
+  <form @submit.prevent="agregarProducto" class="formulario grid-form">
   <div class="form-group autocomplete-wrapper">
     <label>ID o Nombre Producto</label>
     <input
@@ -54,12 +54,12 @@
     <label>Punto de Reposición</label>
     <input v-model.number="nuevoProducto.stockMinimo" type="number" :readonly="false" placeholder="Punto de Reposición" required />
   </div>
+  
+  <div class="form-actions">
+    <button type="submit" @click="agregarProducto" class="azul">➕ Agregar Producto</button>
+    <button type="button" @click="borrarCamposProducto" class="limpiar" :disabled="!tieneDatosProducto">🧹 Borrar Campos</button>
+  </div>
 </form>
-
-<div class="botonera acciones-principales">
-  <button type="submit" @click="agregarProducto" class="azul">➕ Agregar Producto</button>
-  <button type="button" @click="borrarCamposProducto" class="limpiar" :disabled="!tieneDatosProducto">🧹 Borrar Campos</button>
-</div>
 
 <div class="botonera acciones-secundarias">
   <button @click="seleccionarRuta" class="boton-exportar azul">📁 Carpeta</button>

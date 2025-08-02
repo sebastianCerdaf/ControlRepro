@@ -113,18 +113,28 @@ h1, .titulo-central {
 /* ====== FORM ====== */
 form.formulario {
   margin-bottom: 32px;
-  border-bottom: 1.5px solid #e0e7ef;
   padding: 24px;
-  padding-bottom: 36px;
-  background: white;
+  padding-bottom: 24px;
+  background: #f8fafc;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+.form-actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
 .grid-form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+}
+
+.grid-form .autocomplete-wrapper {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 600px) {
@@ -224,7 +234,6 @@ form.formulario {
   z-index: 2;
 }
 
-.acciones-principales,
 .acciones-secundarias {
   display: flex;
   align-items: center;
@@ -234,20 +243,14 @@ form.formulario {
   padding: 16px 0;
 }
 
-.acciones-principales {
-  margin-bottom: 24px;
-  justify-content: flex-start;
-  border-bottom: 1px solid #e2e8f0;
-}
-
 .acciones-secundarias {
   justify-content: flex-end;
 }
 
 .acciones-secundarias button {
-  padding: 8px 14px;
+  padding: 6px 12px;
   font-size: 13px;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 /* Common button styles */
@@ -256,10 +259,10 @@ button.azul,
 button.gris,
 button.eliminar,
 button.limpiar {
-  padding: 12px 20px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: 600;
   color: white;
   cursor: pointer;
