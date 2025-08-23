@@ -9,43 +9,141 @@
 
   <div id="app" style="max-width: 1000px; margin: auto; padding: 40px;">
     <h1>📇 Contacto de Proveedores</h1>
-    
-    <table class="tabla-productos">
-      <thead>
-        <tr>
-          <th>Proveedor</th>
-          <th>Teléfono</th>
-          <th>Email</th>
-          <th>Dirección</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="prov in proveedores">
-          <td>{{ prov.nombre }}</td>
-          <td>{{ prov.telefono }}</td>
-          <td>{{ prov.email }}</td>
-          <td>{{ prov.direccion }}</td>
-        </tr>
-      </tbody>
-    </table>
+
+    <!-- Formulario: Agregar proveedor -->
+    <form @submit.prevent="agregarProveedor" class="formulario" novalidate>
+      <div class="grid-form" style="grid-template-columns: repeat(4, 1fr); gap: 16px;">
+        <div class="form-group" style="grid-column: span 2;">
+          <label>Proveedor</label>
+          <input v-model.trim="nuevo.nombre" placeholder="Nombre del proveedor" required />
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input v-model.trim="nuevo.telefono" placeholder="+56 9 xxxx xxxx" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input v-model.trim="nuevo.email" type="email" placeholder="correo@proveedor.cl" />
+        </div>
+        <div class="form-group" style="grid-column: span 3;">
+          <label>Dirección</label>
+          <input v-model.trim="nuevo.direccion" placeholder="Calle y número" />
+        </div>
+
+        <div class="form-actions" style="grid-column: 1 / -1;">
+          <button type="submit" class="azul">➕ Agregar</button>
+          <button type="button" class="limpiar" @click="limpiarForm" :disabled="!tieneDatos">🧹 Borrar Campos</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Tabla -->
+    <div class="tabla-productos-wrapper">
+      <table class="tabla-productos">
+        <thead>
+          <tr>
+            <th>Proveedor</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Dirección</th>
+            <th style="width:110px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-if="!proveedores.length">
+            <td colspan="5" style="text-align:center; color:#6b7280;">No hay proveedores registrados.</td>
+          </tr>
+          <tr v-for="(prov, i) in proveedores" :key="i">
+            <td>{{ prov.nombre }}</td>
+            <td>{{ prov.telefono }}</td>
+            <td>{{ prov.email }}</td>
+            <td>{{ prov.direccion }}</td>
+            <td>
+              <button class="eliminar" @click="eliminarProveedor(i)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <br>
     <button class="gris" onclick="window.location.href='MainView.html'">⬅ Volver</button>
   </div>
 
+  <div id="popupError" class="popup-error"></div>
+
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
-    Vue.createApp({
+    const STORAGE_KEY = 'agendaProveedores';
+
+    const app = {
       data() {
         return {
-          proveedores: [
-            { nombre: 'Distribuidora Norte', telefono: '+56 9 1234 5678', email: 'norte@proveedor.cl', direccion: 'Av. Norte 123' },
-            { nombre: 'Proveeduría Centro', telefono: '+56 2 9876 5432', email: 'centro@proveedor.cl', direccion: 'Calle Centro 456' },
-            { nombre: 'Suministros Sur', telefono: '+56 9 1122 3344', email: 'sur@suministros.cl', direccion: 'Pasaje Sur 789' }
-          ]
+          proveedores: [],
+          nuevo: { nombre: '', telefono: '', email: '', direccion: '' }
         };
+      },
+
+      computed: {
+        tieneDatos() {
+          const p = this.nuevo;
+          return p.nombre || p.telefono || p.email || p.direccion;
+        }
+      },
+
+      mounted() {
+        const guardados = localStorage.getItem(STORAGE_KEY);
+        if (guardados) {
+          this.proveedores = JSON.parse(guardados);
+        } else {
+          this.proveedores = [
+            { nombre: 'Distribuidora Norte',  telefono: '+56 9 1234 5678', email: 'norte@proveedor.cl',    direccion: 'Av. Norte 123' },
+            { nombre: 'Proveeduría Centro',   telefono: '+56 2 9876 5432', email: 'centro@proveedor.cl',   direccion: 'Calle Centro 456' },
+            { nombre: 'Suministros Sur',      telefono: '+56 9 1122 3344', email: 'sur@suministros.cl',    direccion: 'Pasaje Sur 789' }
+          ];
+          this.guardar();
+        }
+      },
+
+      methods: {
+        agregarProveedor() {
+          if (!this.nuevo.nombre) return this.err('El nombre del proveedor es obligatorio.');
+          if (this.proveedores.some(p => p.nombre.toLowerCase() === this.nuevo.nombre.toLowerCase())) {
+            return this.err('Ya existe un proveedor con ese nombre.');
+          }
+          if (this.nuevo.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.nuevo.email)) {
+            return this.err('El email no tiene un formato válido.');
+          }
+
+          this.proveedores.push({ ...this.nuevo });
+          this.guardar();
+          this.limpiarForm();
+        },
+
+        eliminarProveedor(idx) {
+          if (!confirm('¿Eliminar este proveedor?')) return;
+          this.proveedores.splice(idx, 1);
+          this.guardar();
+        },
+
+        limpiarForm() {
+          this.nuevo = { nombre: '', telefono: '', email: '', direccion: '' };
+        },
+
+        guardar() {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(this.proveedores));
+        },
+
+        err(msg) {
+          const popup = document.getElementById('popupError');
+          popup.textContent = msg;
+          popup.classList.add('visible');
+          setTimeout(() => popup.classList.remove('visible'), 2500);
+        }
       }
-    }).mount('#app');
+    };
+
+    Vue.createApp(app).mount('#app');
   </script>
 </body>
 </html>

@@ -33,20 +33,6 @@ const app = Vue.createApp({
              this.nuevoProducto.stockMinimo !== '';
     }
   },
-  computed: {
-    tieneDatosProducto() {
-      return this.nuevoProducto.id !== '' || 
-             this.nuevoProducto.categoria !== '' || 
-             this.nuevoProducto.precioCaja30 !== '' || 
-             this.nuevoProducto.stock !== '' || 
-             this.nuevoProducto.stockMinimo !== '';
-    },
-    productoBloqueado: false,
-    rutaGuardado: '',
-    sugerencias: [],
-    mostrarSugerencias: false,
-    mostrarErrorCampos: false
-  },
   methods: {
     agregarProducto() {
       if (
@@ -198,9 +184,11 @@ const app = Vue.createApp({
     },
 
     cerrarSesion() {
-      localStorage.removeItem('productos');
-      window.location.href = 'presentation/views/LoginView.html';
+    localStorage.removeItem('productos');
+    localStorage.removeItem('usuarioActual');
+    window.location.href = './LoginView.html';
     },
+
     confirmarCerrarSesion() {
     document.getElementById('modalCerrarSesion').classList.remove('hidden');
     },

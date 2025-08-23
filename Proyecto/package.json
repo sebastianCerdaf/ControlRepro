@@ -29,17 +29,8 @@
       "**/*"
     ],
     "win": {
-      "target": "nsis",
+      "target": "portable",
       "icon": "assets/icono.ico"
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "ControlRepro",
-      "installerIcon": "assets/icono.ico"
     }
   }
 }
