@@ -1,17 +1,19 @@
 # Node modules
 node_modules/
-Projecto/node_modules/
+Proyecto/node_modules/
 
 # Electron build output
-Projecto/ControlRePro-win32-x64/
-Projecto/dist/
+Proyecto/dist/
+Proyecto/win-unpacked/
+Proyecto/*.exe
+Proyecto/ControlRepro-portable.zip
 
 # Build artifacts
-Projecto/*.log
-Projecto/*.tsbuildinfo
-Projecto/*.tmp
-Projecto/*.cache
-Projecto/*.bak
+Proyecto/*.log
+Proyecto/*.tsbuildinfo
+Proyecto/*.tmp
+Proyecto/*.cache
+Proyecto/*.bak
 
 # Compiled binaries and packages
 Projecto/**/*.exe
