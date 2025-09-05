@@ -118,24 +118,18 @@ const app = Vue.createApp({
       this.guardarLocal();
     },
 
-    seleccionarRuta() {
+    exportarDatos() {
       const result = dialog.showOpenDialogSync({
-        title: 'Selecciona una carpeta para guardar los archivos Excel',
+        title: 'Selecciona una carpeta para exportar los datos',
         properties: ['openDirectory']
       });
-      if (result && result.length > 0) {
-        this.rutaGuardado = result[0];
-        alert(`📁 Carpeta seleccionada:\n${this.rutaGuardado}`);
-      }
-    },
-
-    exportarExcel() {
-      if (!this.rutaGuardado) {
-        alert('⚠️ Primero debes seleccionar una carpeta para guardar el archivo.');
-        return;
+      
+      if (!result || result.length === 0) {
+        return; // Usuario canceló la selección de carpeta
       }
 
       try {
+        const rutaSeleccionada = result[0];
         const productosParaExportar = this.productos.map(p => ({
           id: p.id,
           nombre: p.nombre,
@@ -150,13 +144,13 @@ const app = Vue.createApp({
         const wb = xlsx.utils.book_new();
         xlsx.utils.book_append_sheet(wb, ws, 'Productos');
 
-        const nombreArchivo = path.join(this.rutaGuardado, 'productos_exportados.xlsx');
+        const nombreArchivo = path.join(rutaSeleccionada, 'productos_exportados.xlsx');
         xlsx.writeFile(wb, nombreArchivo);
 
-        alert('✅ Archivo Excel exportado con éxito.');
+        alert('✅ Datos exportados con éxito a:\n' + rutaSeleccionada);
       } catch (error) {
         console.error('❌ Error al exportar:', error);
-        alert('❌ Ocurrió un error al exportar el archivo.');
+        alert('❌ Ocurrió un error al exportar los datos.');
       }
     },
 

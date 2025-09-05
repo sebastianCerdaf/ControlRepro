@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>ControlRepro - Reposición Inteligente</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <link rel="stylesheet" href="../../style.css" />
@@ -62,12 +62,9 @@
 </form>
 
 <div class="botonera acciones-secundarias">
-  <button @click="seleccionarRuta" class="boton-exportar azul">📁 Carpeta</button>
-  <button @click="exportarExcel" class="boton-exportar azul">📤 Excel</button>
+  <button @click="exportarDatos" class="boton-exportar azul">📑 Exportar datos</button>
   <button @click="mostrarModal" class="boton-exportar gris">📇 Contactos</button>
 </div>
-
-  <p v-if="rutaGuardado" style="font-style: italic; color: gray;">📂 Carpeta actual: {{ rutaGuardado }}</p>
 
   <div class="tabla-productos-wrapper" v-if="productos.length">
     <table class="tabla-productos">
