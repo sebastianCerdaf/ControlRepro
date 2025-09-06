@@ -7,127 +7,124 @@
   <link rel="stylesheet" href="../../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 </head>
-<body id="app">
-  <div class="main-glass-card" id="innerApp">
-    <header class="header-desordenado">
-      <button class="cerrar-sesion" @click="confirmarCerrarSesion">Cerrar Sesión</button>
-      <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="logo-principal" />
-    </header>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="logo-principal" />
+      </div>
+      <nav class="sidebar-nav">
+        <a href="MainView.html" class="active">📦 Inventario</a>
+        <a href="#" @click.prevent="mostrarModal">📇 Contactos</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-light" style="width: 100%;" @click="confirmarCerrarSesion">Cerrar Sesión</button>
+      </div>
+    </aside>
 
-  <form @submit.prevent="agregarProducto" class="formulario grid-form" novalidate>
-  <div class="form-group autocomplete-wrapper">
-    <label>ID o Nombre Producto</label>
-    <input
-      v-model="nuevoProducto.id"
-      @input="buscarSugerencias"
-      @focus="mostrarSugerencias = true"
-      @blur="ocultarSugerencias"
-      placeholder="ID o Nombre Producto"
-      required
-    />
-    <ul v-if="mostrarSugerencias && sugerencias.length" class="sugerencias">
-      <li
-        v-for="sugerencia in sugerencias"
-        @mousedown.prevent="seleccionarProducto(sugerencia)"
-      >
-        {{ sugerencia.id }} - {{ sugerencia.nombre }}
-      </li>
-    </ul>
-  </div>
+    <main class="main-content">
+      <div class="content-header">
+        <h1>Gestión de Inventario</h1>
+      </div>
 
-  <div class="form-group">
-    <label>Categoría</label>
-    <input v-model="nuevoProducto.categoria" :readonly="productoBloqueado" placeholder="Categoría" required />
-  </div>
-
-  <div class="form-group">
-    <label>Precio por Caja</label>
-    <input v-model="nuevoProducto.precioCaja30" type="number" :readonly="productoBloqueado" placeholder="Precio por Caja" required />
-  </div>
-
-  <div class="form-group">
-    <label>Cajas Ingresadas</label>
-    <input v-model.number="nuevoProducto.stock" type="number" :readonly="false" placeholder="Cajas Ingresadas" required />
-  </div>
-
-  <div class="form-actions">
-    <button type="submit" class="azul">➕ Agregar Producto</button>
-    <button type="button" @click="borrarCamposProducto" class="limpiar" :disabled="!tieneDatosProducto">🧹 Borrar Campos</button>
-  </div>
-</form>
-
-<div class="botonera acciones-secundarias">
-  <button @click="exportarDatos" class="boton-exportar azul">📑 Exportar datos</button>
-  <button @click="mostrarModal" class="boton-exportar gris">📇 Contactos</button>
-</div>
-
-  <div class="tabla-productos-wrapper" v-if="productos.length">
-    <table class="tabla-productos">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Categoría</th>
-          <th>Cajas</th>
-          <th>Precio Caja</th>
-          <th>Proveedores</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(producto, index) in productos"
-            :key="index"
-            :class="{ 'bajo-stock': producto.stock <= producto.stockMinimo }">
-          <td><strong>{{ producto.nombre }}</strong></td>
-          <td>{{ producto.categoria }}</td>
-          <td>{{ producto.stock }}</td>
-          <td>${{ producto.precioCaja30 }}</td>
-          <td>
-            <ul class="proveedores-tabla">
-              <li v-for="(prov, i) in producto.proveedores" :key="i">
-                {{ prov.nombre }} <small>({{ prov.leadTime }} días)</small>
+      <div class="card">
+        <form @submit.prevent="agregarProducto" novalidate>
+          <div class="form-group autocomplete-wrapper">
+            <label>Buscar Producto por ID o Nombre</label>
+            <input v-model="nuevoProducto.id" @input="buscarSugerencias" @focus="mostrarSugerencias = true" @blur="ocultarSugerencias" placeholder="Escribe para buscar..." required />
+            <ul v-if="mostrarSugerencias && sugerencias.length" class="sugerencias">
+              <li v-for="sugerencia in sugerencias" @mousedown.prevent="seleccionarProducto(sugerencia)">
+                {{ sugerencia.id }} - {{ sugerencia.nombre }}
               </li>
             </ul>
-          </td>
-          <td>
-            <button class="eliminar" @click="eliminarProducto(index)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Categoría</label>
+              <input v-model="nuevoProducto.categoria" :readonly="productoBloqueado" placeholder="Categoría" required />
+            </div>
+            <div class="form-group">
+              <label>Precio por Caja</label>
+              <input v-model="nuevoProducto.precioCaja30" type="number" :readonly="productoBloqueado" placeholder="Precio" required />
+            </div>
+            <div class="form-group">
+              <label>Cajas Ingresadas</label>
+              <input v-model.number="nuevoProducto.stock" type="number" placeholder="Cantidad" required />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">➕ Agregar Producto</button>
+            <button type="button" class="btn btn-secondary" @click="borrarCamposProducto" :disabled="!tieneDatosProducto">🧹 Limpiar</button>
+          </div>
+        </form>
+      </div>
 
-<div id="modalAcceso" class="modal hidden">
-  <div class="modal-contenido">
-    <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="modal-logo" />
-    <h2>Acceso restringido</h2>
-    <p>Para ingresar a la sección de contactos, necesitas autorización de un administrador.</p>
-    <input type="password" id="codigoInput" placeholder="Ingresa el código de acceso" />
-    <div class="modal-botones">
-      <button @click="validarCodigo" class="azul">Acceder</button>
-      <button @click="cerrarModal" class="gris">Cancelar</button>
+      <div class="card table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th>Cajas</th>
+              <th>Precio Caja</th>
+              <th>Proveedores</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="!productos.length"><td colspan="6" style="text-align:center;">No hay productos en el inventario.</td></tr>
+            <tr v-for="(producto, index) in productos" :key="index" :class="{ 'bajo-stock': producto.stock <= producto.stockMinimo }">
+              <td><strong>{{ producto.nombre }}</strong></td>
+              <td>{{ producto.categoria }}</td>
+              <td>{{ producto.stock }}</td>
+              <td>${{ producto.precioCaja30 }}</td>
+              <td>
+                <ul class="proveedores-tabla" style="padding-left: 0; list-style: none; margin: 0;">
+                  <li v-for="(prov, i) in producto.proveedores" :key="i">
+                    {{ prov.nombre }} <small>({{ prov.leadTime }} días)</small>
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <button class="btn btn-danger" @click="eliminarProducto(index)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       <div class="form-actions">
+        <button @click="exportarDatos" class="btn btn-secondary">📑 Exportar datos</button>
+      </div>
+    </main>
+
+    <div id="modalAcceso" class="modal hidden">
+      <div class="modal-contenido">
+        <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="modal-logo" style="width: 150px;"/>
+        <h2>Acceso restringido</h2>
+        <p>Para ingresar a la sección de contactos, necesitas autorización de un administrador.</p>
+        <input type="password" id="codigoInput" placeholder="Ingresa el código de acceso" />
+        <div class="modal-botones">
+          <button @click="validarCodigo" class="btn btn-primary">Acceder</button>
+          <button @click="cerrarModal" class="btn btn-secondary">Cancelar</button>
+        </div>
+        <p id="mensajeError" class="modal-error"></p>
+      </div>
     </div>
-    <p id="mensajeError" class="modal-error"></p>
-  </div>
-</div>
 
-<div id="modalCerrarSesion" class="modal hidden">
-  <div class="modal-contenido">
-    <h2>¿Cerrar sesión?</h2>
-    <p>Se perderán los datos actuales si no los ha exportado.</p>
-    <div class="modal-botones">
-      <button @click="cerrarSesion" class="azul">Sí, cerrar sesión</button>
-      <button @click="cerrarModalCerrarSesion" class="gris">Cancelar</button>
+    <div id="modalCerrarSesion" class="modal hidden">
+      <div class="modal-contenido">
+        <h2>¿Cerrar sesión?</h2>
+        <p>Se perderán los datos actuales si no los ha exportado.</p>
+        <div class="modal-botones">
+          <button @click="cerrarSesion" class="btn btn-danger">Sí, cerrar sesión</button>
+          <button @click="cerrarModalCerrarSesion" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </div>
     </div>
+    <div id="popupError" class="popup-error"></div>
   </div>
-</div>
-  <div id="popupError" class="popup-error"></div>
-</div>
 
-<script src="../../data/productos.repository.js"></script>
-<script src="../scripts/MainView.js"></script>
-
-
-
+  <script src="../../data/productos.repository.js"></script>
+  <script src="../scripts/MainView.js"></script>
 </body>
 </html>

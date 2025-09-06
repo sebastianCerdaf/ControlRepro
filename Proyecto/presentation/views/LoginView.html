@@ -10,15 +10,16 @@
 
   <div class="login-container">
     <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="logo-login" />
-
     <h2>Inicio de Sesión</h2>
-
     <form id="loginForm">
-      <input type="text" id="rut" placeholder="RUT (ej: 12.345.678-9)" maxlength="12" required />
-      <input type="password" id="pin" placeholder="PIN" required />
-      <button type="submit">Ingresar</button>
+      <div class="form-group">
+        <input type="text" id="rut" placeholder="RUT (ej: 12.345.678-9)" maxlength="12" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="pin" placeholder="PIN" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Ingresar</button>
     </form>
-
     <p id="mensajeError" class="error"></p>
   </div>
 

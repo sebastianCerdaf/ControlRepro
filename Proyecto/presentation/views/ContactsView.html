@@ -6,68 +6,80 @@
   <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
-
-  <div id="app" style="max-width: 1000px; margin: auto; padding: 40px;">
-    <h1>📇 Contacto de Proveedores</h1>
-
-    <!-- Formulario: Agregar proveedor -->
-    <form @submit.prevent="agregarProveedor" class="formulario" novalidate>
-      <div class="grid-form" style="grid-template-columns: repeat(4, 1fr); gap: 16px;">
-        <div class="form-group" style="grid-column: span 2;">
-          <label>Proveedor</label>
-          <input v-model.trim="nuevo.nombre" placeholder="Nombre del proveedor" required />
-        </div>
-        <div class="form-group">
-          <label>Teléfono</label>
-          <input v-model.trim="nuevo.telefono" placeholder="+56 9 xxxx xxxx" />
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input v-model.trim="nuevo.email" type="email" placeholder="correo@proveedor.cl" />
-        </div>
-        <div class="form-group" style="grid-column: span 3;">
-          <label>Dirección</label>
-          <input v-model.trim="nuevo.direccion" placeholder="Calle y número" />
-        </div>
-
-        <div class="form-actions" style="grid-column: 1 / -1;">
-          <button type="submit" class="azul">➕ Agregar</button>
-          <button type="button" class="limpiar" @click="limpiarForm" :disabled="!tieneDatos">🧹 Borrar Campos</button>
-        </div>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="logo-principal" />
       </div>
-    </form>
+      <nav class="sidebar-nav">
+        <a href="MainView.html">📦 Inventario</a>
+        <a href="ContactsView.html" class="active">📇 Contactos</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-light" style="width: 100%;" onclick="window.location.href='MainView.html'">⬅ Volver</button>
+      </div>
+    </aside>
 
-    <!-- Tabla -->
-    <div class="tabla-productos-wrapper">
-      <table class="tabla-productos">
-        <thead>
-          <tr>
-            <th>Proveedor</th>
-            <th>Teléfono</th>
-            <th>Email</th>
-            <th>Dirección</th>
-            <th style="width:110px;"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-if="!proveedores.length">
-            <td colspan="5" style="text-align:center; color:#6b7280;">No hay proveedores registrados.</td>
-          </tr>
-          <tr v-for="(prov, i) in proveedores" :key="i">
-            <td>{{ prov.nombre }}</td>
-            <td>{{ prov.telefono }}</td>
-            <td>{{ prov.email }}</td>
-            <td>{{ prov.direccion }}</td>
-            <td>
-              <button class="eliminar" @click="eliminarProveedor(i)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <main class="main-content">
+      <div class="content-header">
+        <h1>Contacto de Proveedores</h1>
+      </div>
 
-    <br>
-    <button class="gris" onclick="window.location.href='MainView.html'">⬅ Volver</button>
+      <div class="card">
+        <form @submit.prevent="agregarProveedor" novalidate>
+          <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="form-group">
+              <label>Proveedor</label>
+              <input v-model.trim="nuevo.nombre" placeholder="Nombre del proveedor" required />
+            </div>
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input v-model.trim="nuevo.telefono" placeholder="+56 9 xxxx xxxx" />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input v-model.trim="nuevo.email" type="email" placeholder="correo@proveedor.cl" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Dirección</label>
+            <input v-model.trim="nuevo.direccion" placeholder="Calle, número, comuna" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">➕ Agregar Proveedor</button>
+            <button type="button" class="btn btn-secondary" @click="limpiarForm" :disabled="!tieneDatos">🧹 Limpiar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Proveedor</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Dirección</th>
+              <th style="width:110px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="!proveedores.length">
+              <td colspan="5" style="text-align:center;">No hay proveedores registrados.</td>
+            </tr>
+            <tr v-for="(prov, i) in proveedores" :key="i">
+              <td><strong>{{ prov.nombre }}</strong></td>
+              <td>{{ prov.telefono }}</td>
+              <td>{{ prov.email }}</td>
+              <td>{{ prov.direccion }}</td>
+              <td>
+                <button class="btn btn-danger" @click="eliminarProveedor(i)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
   </div>
 
   <div id="popupError" class="popup-error"></div>
@@ -97,9 +109,9 @@
           this.proveedores = JSON.parse(guardados);
         } else {
           this.proveedores = [
-            { nombre: 'Distribuidora Norte',  telefono: '+56 9 1234 5678', email: 'norte@proveedor.cl',    direccion: 'Av. Norte 123' },
-            { nombre: 'Proveeduría Centro',   telefono: '+56 2 9876 5432', email: 'centro@proveedor.cl',   direccion: 'Calle Centro 456' },
-            { nombre: 'Suministros Sur',      telefono: '+56 9 1122 3344', email: 'sur@suministros.cl',    direccion: 'Pasaje Sur 789' }
+            { nombre: 'Distribuidora Norte',  telefono: '+56 9 1234 5678', email: 'norte@proveedor.cl',    direccion: 'Av. Norte 123, Santiago' },
+            { nombre: 'Proveeduría Centro',   telefono: '+56 2 9876 5432', email: 'centro@proveedor.cl',   direccion: 'Calle Centro 456, Santiago' },
+            { nombre: 'Suministros Sur',      telefono: '+56 9 1122 3344', email: 'sur@suministros.cl',    direccion: 'Pasaje Sur 789, Rancagua' }
           ];
           this.guardar();
         }
