@@ -6,6 +6,7 @@ window.productosBase = [
     nombre: 'Arroz 1kg',
     categoria: 'Alimentos',
     precioCaja30: 18000,
+    stockMinimo: 10,
     proveedores: [
       { nombre: 'Distribuidora Norte', leadTime: 4 }
     ]
@@ -15,6 +16,7 @@ window.productosBase = [
     nombre: 'Aceite vegetal 1L',
     categoria: 'Alimentos',
     precioCaja30: 42000,
+    stockMinimo: 12,
     proveedores: [
       { nombre: 'Aceites del Sur', leadTime: 5 }
     ]
@@ -24,6 +26,7 @@ window.productosBase = [
     nombre: 'Harina integral 1kg',
     categoria: 'Alimentos',
     precioCaja30: 20000,
+    stockMinimo: 15,
     proveedores: [
       { nombre: 'Molinos del Valle', leadTime: 3 }
     ]
@@ -33,6 +36,7 @@ window.productosBase = [
     nombre: 'Jabón líquido 5L',
     categoria: 'Limpieza',
     precioCaja30: 27000,
+    stockMinimo: 8,
     proveedores: [
       { nombre: 'LimpioMax', leadTime: 2 }
     ]
@@ -42,6 +46,7 @@ window.productosBase = [
     nombre: 'Cloro 1L',
     categoria: 'Limpieza',
     precioCaja30: 15000,
+    stockMinimo: 10,
     proveedores: [
       { nombre: 'Higieniza Spa', leadTime: 4 }
     ]
@@ -51,6 +56,7 @@ window.productosBase = [
     nombre: 'Leche entera 1L',
     categoria: 'Lácteos',
     precioCaja30: 32000,
+    stockMinimo: 20,
     proveedores: [
       { nombre: 'Lácteos del Sur', leadTime: 1 }
     ]
@@ -60,6 +66,7 @@ window.productosBase = [
     nombre: 'Yogur natural 500ml',
     categoria: 'Lácteos',
     precioCaja30: 36000,
+    stockMinimo: 18,
     proveedores: [
       { nombre: 'Yogurandes', leadTime: 2 }
     ]
@@ -69,6 +76,7 @@ window.productosBase = [
     nombre: 'Toalla de papel',
     categoria: 'Higiene',
     precioCaja30: 25000,
+    stockMinimo: 10,
     proveedores: [
       { nombre: 'Papeles Higienol', leadTime: 3 }
     ]
@@ -78,6 +86,7 @@ window.productosBase = [
     nombre: 'Papel higiénico 4 rollos',
     categoria: 'Higiene',
     precioCaja30: 22000,
+    stockMinimo: 25,
     proveedores: [
       { nombre: 'Papelería La Blanca', leadTime: 2 }
     ]
@@ -87,6 +96,7 @@ window.productosBase = [
     nombre: 'Salsa de tomate 200g',
     categoria: 'Alimentos',
     precioCaja30: 19500,
+    stockMinimo: 15,
     proveedores: [
       { nombre: 'Salsas Doña Anita', leadTime: 5 }
     ]

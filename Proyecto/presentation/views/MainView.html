@@ -50,11 +50,6 @@
     <input v-model.number="nuevoProducto.stock" type="number" :readonly="false" placeholder="Cajas Ingresadas" required />
   </div>
 
-  <div class="form-group">
-    <label>Punto de Reposición</label>
-    <input v-model.number="nuevoProducto.stockMinimo" type="number" :readonly="false" placeholder="Punto de Reposición" required />
-  </div>
-  
   <div class="form-actions">
     <button type="submit" class="azul">➕ Agregar Producto</button>
     <button type="button" @click="borrarCamposProducto" class="limpiar" :disabled="!tieneDatosProducto">🧹 Borrar Campos</button>
@@ -73,7 +68,6 @@
           <th>Producto</th>
           <th>Categoría</th>
           <th>Cajas</th>
-          <th>Punto Reposición</th>
           <th>Precio Caja</th>
           <th>Proveedores</th>
           <th></th>
@@ -86,7 +80,6 @@
           <td><strong>{{ producto.nombre }}</strong></td>
           <td>{{ producto.categoria }}</td>
           <td>{{ producto.stock }}</td>
-          <td>{{ producto.stockMinimo }}</td>
           <td>${{ producto.precioCaja30 }}</td>
           <td>
             <ul class="proveedores-tabla">

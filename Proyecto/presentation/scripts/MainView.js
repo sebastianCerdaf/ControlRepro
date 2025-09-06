@@ -36,10 +36,9 @@ const app = Vue.createApp({
   methods: {
     agregarProducto() {
       if (
-        this.nuevoProducto.stock === '' ||
-        this.nuevoProducto.stockMinimo === ''
+        this.nuevoProducto.stock === ''
       ) {
-        this.mostrarErrorTemporal('Debe ingresar el número de cajas y el punto de reposición.');
+        this.mostrarErrorTemporal('Debe ingresar el número de cajas.');
         this.productoBloqueado = false;
         return;
       }
@@ -86,7 +85,7 @@ const app = Vue.createApp({
         categoria: producto.categoria,
         precioCaja30: producto.precioCaja30,
         stock: '',
-        stockMinimo: '',
+        stockMinimo: producto.stockMinimo,
         proveedores: producto.proveedores || []
       };
       this.productoBloqueado = false;
