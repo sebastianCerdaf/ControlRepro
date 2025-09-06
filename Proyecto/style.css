@@ -10,7 +10,8 @@
   
   --text-primary: #F1F5F9;
   --text-secondary: #94A3B8;
-  
+  --text-color: var(--text-primary); 
+
   --border-color: #475569;
 
   --white: #FFFFFF;
@@ -150,6 +151,11 @@ body {
   cursor: not-allowed;
 }
 
+.form-group input::placeholder {
+  color: #94A3B8;
+  opacity: 1;
+}
+
 .form-actions {
   display: flex;
   gap: 0.75rem;
@@ -205,8 +211,9 @@ body {
   border: 1px solid var(--medium-gray);
   color: var(--text-color);
 }
+
 .btn-light:hover {
-  background-color: #e9ecef;
+  background-color: #475569; /* Usar un color más oscuro del tema */
 }
 
 .btn[disabled] {
@@ -236,6 +243,12 @@ body {
   font-weight: 600;
   background-color: var(--bg-tertiary);
   color: var(--text-secondary);
+}
+
+.form-group label,
+.table th {
+  color: #CBD5E1;
+  font-weight: 500;
 }
 
 .table tbody tr:last-child td {
@@ -407,4 +420,23 @@ body {
   margin-top: 1rem;
   font-weight: 500;
   min-height: 1.2em;
+}
+
+.logo-container-circle {
+  width: 130px;
+  height: 130px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  padding: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container-circle img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
