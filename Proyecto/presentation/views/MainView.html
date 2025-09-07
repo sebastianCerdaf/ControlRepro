@@ -82,7 +82,7 @@
                 {{ producto.stock }}
                 <span v-if="producto.stock <= producto.stockMinimo" class="stock-warning">
                   ⚠️
-                  <span class="tooltip">Stock bajo: {{ producto.stock }} cajas (Mínimo recomendad: {{ producto.stockMinimo }} cajas)</span>
+                  <span class="tooltip">Stock bajo: {{ producto.stock }} cajas (Mínimo recomendado: {{ producto.stockMinimo }} cajas)</span>
                 </span>
               </td>
               <td>${{ producto.precioCaja30 }}</td>
