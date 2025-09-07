@@ -121,37 +121,6 @@ const app = Vue.createApp({
       }
     },
 
-    exportarExcel() {
-      if (!this.rutaGuardado) {
-        alert('⚠️ Primero debes seleccionar una carpeta para guardar el archivo.');
-        return;
-      }
-
-      try {
-        const productosParaExportar = this.productos.map(p => ({
-          id: p.id,
-          nombre: p.nombre,
-          categoria: p.categoria,
-          precioCaja30: p.precioCaja30,
-          stock: p.stock,
-          stockMinimo: p.stockMinimo,
-          proveedores: p.proveedores.map(prov => `${prov.nombre} (${prov.leadTime} días)`).join(', ')
-        }));
-
-        const ws = xlsx.utils.json_to_sheet(productosParaExportar);
-        const wb = xlsx.utils.book_new();
-        xlsx.utils.book_append_sheet(wb, ws, 'Productos');
-
-        const nombreArchivo = path.join(this.rutaGuardado, 'productos_exportados.xlsx');
-        xlsx.writeFile(wb, nombreArchivo);
-
-        alert('✅ Archivo Excel exportado con éxito.');
-      } catch (error) {
-        console.error('❌ Error al exportar:', error);
-        alert('❌ Ocurrió un error al exportar el archivo.');
-      }
-    },
-
     guardarLocal() {
       localStorage.setItem('productos', JSON.stringify(this.productos));
     },

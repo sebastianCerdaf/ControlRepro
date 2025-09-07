@@ -129,6 +129,10 @@ const app = Vue.createApp({
 
       try {
         const rutaSeleccionada = result[0];
+        const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual')) || { rut: 'unknown' };
+        const fecha = new Date();
+        const fechaStr = `${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()}`;
+        
         const productosParaExportar = this.productos.map(p => ({
           id: p.id,
           nombre: p.nombre,
@@ -143,7 +147,7 @@ const app = Vue.createApp({
         const wb = xlsx.utils.book_new();
         xlsx.utils.book_append_sheet(wb, ws, 'Productos');
 
-        const nombreArchivo = path.join(rutaSeleccionada, 'productos_exportados.xlsx');
+        const nombreArchivo = path.join(rutaSeleccionada, `pedido_${usuarioActual.rut.replace(/\./g, '').replace(/-/g, '')}_${fechaStr}.xlsx`);
         xlsx.writeFile(wb, nombreArchivo);
 
         alert('✅ Datos exportados con éxito a:\n' + rutaSeleccionada);
