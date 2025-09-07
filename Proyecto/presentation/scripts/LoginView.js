@@ -52,6 +52,6 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     localStorage.setItem('usuarioActual', JSON.stringify(trabajador));
     window.location.href = 'MainView.html';
   } else {
-    mensajeError.textContent = '⚠️ RUT o PIN incorrectos';
+    mensajeError.textContent = '⚠️ RUT o Contraseña incorrectos';
   }
 });
