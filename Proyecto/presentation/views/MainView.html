@@ -17,7 +17,7 @@
       </div>
       <nav class="sidebar-nav">
         <a href="MainView.html" class="active">📦 Inventario</a>
-        <a href="#" @click.prevent="mostrarModal">📇 Contactos</a>
+        <a v-if="isAdmin" href="ContactsView.html">📇 Contactos</a>
       </nav>
       <div class="sidebar-footer">
         <button class="btn btn-light" style="width: 100%;" @click="confirmarCerrarSesion">Cerrar Sesión</button>
@@ -98,22 +98,6 @@
         <button @click="exportarDatos" class="btn btn-secondary">📑 Exportar datos</button>
       </div>
     </main>
-
-    <div id="modalAcceso" class="modal hidden">
-      <div class="modal-contenido">
-        <div class="logo-container-circle" style="width: 110px; height: 110px;">
-          <img src="../../assets/Icon.png" alt="Logo ControlRepro" class="modal-logo" />
-        </div>
-        <h2>Acceso restringido</h2>
-        <p>Para ingresar a la sección de contactos, necesitas autorización de un administrador.</p>
-        <input type="password" id="codigoInput" placeholder="Ingresa el código de acceso" />
-        <div class="modal-botones">
-          <button @click="validarCodigo" class="btn btn-primary">Acceder</button>
-          <button @click="cerrarModal" class="btn btn-secondary">Cancelar</button>
-        </div>
-        <p id="mensajeError" class="modal-error"></p>
-      </div>
-    </div>
 
     <div id="modalCerrarSesion" class="modal hidden">
       <div class="modal-contenido">

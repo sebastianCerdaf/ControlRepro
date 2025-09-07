@@ -21,10 +21,14 @@ const app = Vue.createApp({
       rutaGuardado: '',
       sugerencias: [],
       mostrarSugerencias: false,
-      mostrarErrorCampos: false
+      mostrarErrorCampos: false,
+      usuarioActual: JSON.parse(localStorage.getItem('usuarioActual')) || {}
     };
   },
   computed: {
+    isAdmin() {
+      return this.usuarioActual.admin === true;
+    },
     tieneDatosProducto() {
       return this.nuevoProducto.id !== '' || 
              this.nuevoProducto.categoria !== '' || 
@@ -159,25 +163,6 @@ const app = Vue.createApp({
 
     guardarLocal() {
       localStorage.setItem('productos', JSON.stringify(this.productos));
-    },
-
-    mostrarModal() {
-      document.getElementById('modalAcceso').classList.remove('hidden');
-      document.getElementById('codigoInput').value = '';
-      document.getElementById('mensajeError').textContent = '';
-    },
-
-    cerrarModal() {
-      document.getElementById('modalAcceso').classList.add('hidden');
-    },
-
-    validarCodigo() {
-      const codigo = document.getElementById('codigoInput').value;
-      if (codigo === 'admin123') {
-        window.location.href = 'ContactsView.html';
-      } else {
-        document.getElementById('mensajeError').textContent = 'Código incorrecto. Acceso denegado.';
-      }
     },
 
     cerrarSesion() {
