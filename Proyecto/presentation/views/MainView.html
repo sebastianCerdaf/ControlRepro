@@ -78,7 +78,13 @@
             <tr v-for="(producto, index) in productos" :key="index" :class="{ 'bajo-stock': producto.stock <= producto.stockMinimo }">
               <td><strong>{{ producto.nombre }}</strong></td>
               <td>{{ producto.categoria }}</td>
-              <td>{{ producto.stock }}</td>
+              <td>
+                {{ producto.stock }}
+                <span v-if="producto.stock <= producto.stockMinimo" class="stock-warning">
+                  ⚠️
+                  <span class="tooltip">Stock bajo: {{ producto.stock }} cajas (Mínimo recomendad: {{ producto.stockMinimo }} cajas)</span>
+                </span>
+              </td>
               <td>${{ producto.precioCaja30 }}</td>
               <td>
                 <ul class="proveedores-tabla" style="padding-left: 0; list-style: none; margin: 0;">

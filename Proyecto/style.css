@@ -213,7 +213,7 @@ body {
 }
 
 .btn-light:hover {
-  background-color: #475569; /* Usar un color más oscuro del tema */
+  background-color: #475569;
 }
 
 .btn[disabled] {
@@ -256,7 +256,7 @@ body {
 }
 
 .table tbody tr:hover {
-  background-color: #3E4C62; /* Un poco más claro que el fondo de la tarjeta */
+  background-color: #3E4C62;
 }
 
 .bajo-stock {
@@ -266,6 +266,51 @@ body {
 .bajo-stock td:first-child {
   font-weight: 600;
   color: var(--danger-color);
+}
+
+.stock-warning {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  color: var(--danger-color);
+  position: relative;
+  cursor: help;
+}
+
+.stock-warning:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  width: max-content;
+  max-width: 200px;
+  z-index: 10;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+  box-shadow: var(--box-shadow);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent var(--bg-secondary) transparent transparent;
 }
 
 /* ====== AUTOCOMPLETE ====== */
