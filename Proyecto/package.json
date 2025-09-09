@@ -1,36 +1,59 @@
 {
   "name": "controlrepro",
   "version": "1.0.0",
+  "description": "ControlRepro - Sistema de gestión inteligente para reposición de productos en PYMEs",
+  "author": "Sebastián Cerda Fuentes",
+  "license": "MIT",
   "main": "main.js",
-  "description": "Control inteligente de reposiciones para PYMES",
-  "author": "Sebastian Cerda Fuentes",
-  "license": "ISC",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist": "electron-builder -mwl"
   },
   "dependencies": {
-    "@electron/remote": "^2.1.2",
+    "better-sqlite3": "^9.0.0",
+    "electron": "^30.0.0",
+    "vue": "^3.4.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "electron": "^37.2.0",
-    "electron-builder": "^26.0.12",
-    "electron-packager": "^17.1.2"
+    "electron-builder": "^24.13.3"
   },
   "build": {
     "appId": "com.controlrepro.app",
     "productName": "ControlRepro",
-    "copyright": "Copyright © 2025",
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/.*",
+      "!**/node_modules/.bin",
+      "!src/test",
+      "!**/*.map"
+    ],
     "directories": {
+      "buildResources": "assets",
       "output": "dist"
     },
-    "files": [
-      "**/*"
-    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.productivity",
+      "artifactName": "ControlRepro-mac-${version}.${ext}"
+    },
     "win": {
-      "target": "portable",
-      "icon": "assets/icono.ico"
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "ControlRepro-win-${version}-setup.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
     }
   }
 }
